@@ -5,15 +5,20 @@ const calculator = document.querySelector('.calculator')
 const keys = calculator.querySelector('.calculator__keys')
 const aff = calculator.querySelector('.calculator__display')
 
-staged = 0
-current = 0
+staged = "0"
+current = "0"
 
 keys.addEventListener('click', e => {
   if (e.target.matches('button')) {
     const key = e.target
     const action = key.dataset.action
     if (!action) {
-        current = parseFloat( current.toString() + key.textContent)
+        if (current == "0" || current == ""){
+            current = key.textContent
+        }
+        else {
+            current = current.toString() + key.textContent
+        }
         console.log(current)
       }
       if (
@@ -25,20 +30,25 @@ keys.addEventListener('click', e => {
         console.log('operator key!')
       }
       if (action === 'decimal') {
+        if(!current.includes(".")){
+            current = current.toString() + ".";
+        }
         console.log('decimal key!')
       }
       
       if (action === 'clear') {
+        current = 0
+        staged = 0
         console.log('clear key!')
       }
       
       if (action === 'calculate') {
         console.log('equal key!')
       }
+    affiche(current.toString())
   }
 })
 
 function affiche(content){
- screen = document.getElementById("affichage");
- screen.innerHTML = content;
+ document.getElementById("affichage").innerHTML = content;
 }
