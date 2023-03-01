@@ -19,7 +19,6 @@ keys.addEventListener('click', e => {
         else {
             current = current.toString() + key.textContent;
         }
-        console.log(current);
       }
       if (
         action === 'add' ||
@@ -27,7 +26,6 @@ keys.addEventListener('click', e => {
         action === 'multiply' ||
         action === 'divide'
       ) {
-        console.log('operator key!')
         if(operator == "" && current != "" && current != "error"){
             staged = current;
             current = "";
@@ -49,18 +47,15 @@ keys.addEventListener('click', e => {
         if(!current.includes(".")){
             current = current.toString() + ".";
         }
-        console.log('decimal key!')
       }
       
       if (action === 'clear') {
         current = "0";
         staged = "";
         operator = "";
-        console.log('clear key!');
       }
       
       if (action === 'calculate') {
-        console.log('equal key!');
         if(operator != ""){
             if(current != ""){
                 if (operator == "+"){
