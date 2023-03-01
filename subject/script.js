@@ -13,7 +13,7 @@ keys.addEventListener('click', e => {
     const key = e.target
     const action = key.dataset.action
     if (!action) {
-        if (current == "0" || current == ""){
+        if (current == "0" || current == "" || current == "error"){
             current = key.textContent
         }
         else {
@@ -28,7 +28,7 @@ keys.addEventListener('click', e => {
         action === 'divide'
       ) {
         console.log('operator key!')
-        if(operator == "" && current != ""){
+        if(operator == "" && current != "" && current != "error"){
             staged = current
             current = ""
             if(action == 'add'){
@@ -73,7 +73,12 @@ keys.addEventListener('click', e => {
                     current = parseFloat(staged) * parseFloat(current);
                 } 
                 else if (operator == "÷"){
-                    current = parseFloat(staged) / parseFloat(current);
+                    if(current == "0"){
+                        current = "error"
+                    }
+                    else{
+                        current = parseFloat(staged) / parseFloat(current);
+                    }
                 } 
                 current = current.toString();
                 operator = ""
