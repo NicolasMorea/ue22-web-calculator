@@ -10,16 +10,16 @@ current = "0"
 operator = ""
 keys.addEventListener('click', e => {
   if (e.target.matches('button')) {
-    const key = e.target
-    const action = key.dataset.action
+    const key = e.target;
+    const action = key.dataset.action;
     if (!action) {
         if (current == "0" || current == "" || current == "error"){
-            current = key.textContent
+            current = key.textContent;
         }
         else {
-            current = current.toString() + key.textContent
+            current = current.toString() + key.textContent;
         }
-        console.log(current)
+        console.log(current);
       }
       if (
         action === 'add' ||
@@ -29,8 +29,8 @@ keys.addEventListener('click', e => {
       ) {
         console.log('operator key!')
         if(operator == "" && current != "" && current != "error"){
-            staged = current
-            current = ""
+            staged = current;
+            current = "";
             if(action == 'add'){
                 operator = "+";
             }
@@ -53,14 +53,14 @@ keys.addEventListener('click', e => {
       }
       
       if (action === 'clear') {
-        current = "0"
-        staged = ""
-        operator = ""
-        console.log('clear key!')
+        current = "0";
+        staged = "";
+        operator = "";
+        console.log('clear key!');
       }
       
       if (action === 'calculate') {
-        console.log('equal key!')
+        console.log('equal key!');
         if(operator != ""){
             if(current != ""){
                 if (operator == "+"){
@@ -74,19 +74,19 @@ keys.addEventListener('click', e => {
                 } 
                 else if (operator == "÷"){
                     if(current == "0"){
-                        current = "error"
+                        current = "error";
                     }
                     else{
                         current = parseFloat(staged) / parseFloat(current);
                     }
                 } 
                 current = current.toString();
-                operator = ""
-                staged = ""
+                operator = "";
+                staged = "";
             }
         }
       }
-    affiche(staged + operator + current)
+    affiche(staged + " " + operator + " " +current)
   }
 })
 
