@@ -5,9 +5,9 @@ const calculator = document.querySelector('.calculator')
 const keys = calculator.querySelector('.calculator__keys')
 const aff = calculator.querySelector('.calculator__display')
 
-staged = "0"
+staged = ""
 current = "0"
-
+operator = ""
 keys.addEventListener('click', e => {
   if (e.target.matches('button')) {
     const key = e.target
@@ -28,6 +28,22 @@ keys.addEventListener('click', e => {
         action === 'divide'
       ) {
         console.log('operator key!')
+        if(operator == "" && current != ""){
+            staged = current
+            current = ""
+            if(action == 'add'){
+                operator = "+";
+            }
+            else if(action == 'subtract'){
+                operator = "-";
+            }
+            else if(action == 'multiply'){
+                operator = "&times";
+            }
+            else if(action == 'divide'){
+                operator = "÷";
+            }
+        }
       }
       if (action === 'decimal') {
         if(!current.includes(".")){
@@ -37,15 +53,35 @@ keys.addEventListener('click', e => {
       }
       
       if (action === 'clear') {
-        current = 0
-        staged = 0
+        current = "0"
+        staged = ""
+        operator = ""
         console.log('clear key!')
       }
       
       if (action === 'calculate') {
         console.log('equal key!')
+        if(operator != ""){
+            if(current != ""){
+                if (operator == "+"){
+                    current = parseFloat(staged) + parseFloat(current);
+                } 
+                else if (operator == "-"){
+                    current = parseFloat(staged) - parseFloat(current);
+                } 
+                else if (operator == "&times"){
+                    current = parseFloat(staged) * parseFloat(current);
+                } 
+                else if (operator == "÷"){
+                    current = parseFloat(staged) / parseFloat(current);
+                } 
+                current = current.toString();
+                operator = ""
+                staged = ""
+            }
+        }
       }
-    affiche(current.toString())
+    affiche(staged + operator + current)
   }
 })
 
